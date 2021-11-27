@@ -25,6 +25,17 @@ find bin_dsp/ -name "libCMSIS*.a" -exec arm-none-eabi-ar -x  {} \;
 arm-none-eabi-ar -qc libarm_cortexM4lf_math.a *.o
 rm *.o
 
+# Cortex-M0+, no FPU
+cmake -DROOT=$(pwd)"/../CMSIS_5" \
+  -DCMAKE_PREFIX_PATH="/opt/gcc-arm-none-eabi" \
+  -DCMAKE_TOOLCHAIN_FILE="./gcc.cmake" \
+  -DARM_CPU="cortex-m0plus" \
+  -G "Unix Makefiles" ..
+make -j 6
+find bin_dsp/ -name "libCMSIS*.a" -exec arm-none-eabi-ar -x  {} \;
+arm-none-eabi-ar -qc libarm_cortexM0l_math.a *.o
+rm *.o
+
 # Get the official pack
 wget https://github.com/ARM-software/CMSIS_5/releases/download/${RELEASE}/ARM.CMSIS.${RELEASE}.pack && unzip ARM.CMSIS.${RELEASE}.pack -d ARM.CMSIS.${RELEASE}/ && rm ARM.CMSIS.${RELEASE}.pack
 
