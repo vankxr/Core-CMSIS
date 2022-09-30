@@ -1,6 +1,6 @@
 #!/bin/sh
 
-RELEASE="5.8.0"
+RELEASE="5.9.0"
 git submodule init && git submodule update && cd ../CMSIS_5 && git checkout ${RELEASE} && cd -
 
 # Cortex-M7, Double Precision FPU
@@ -40,8 +40,8 @@ rm *.o
 wget https://github.com/ARM-software/CMSIS_5/releases/download/${RELEASE}/ARM.CMSIS.${RELEASE}.pack && unzip ARM.CMSIS.${RELEASE}.pack -d ARM.CMSIS.${RELEASE}/ && rm ARM.CMSIS.${RELEASE}.pack
 
 # Create the Lib directory and move the built libraries there
-mkdir -p ARM.CMSIS.5.8.0/CMSIS/DSP/Lib/GCC/
-mv lib*.a ARM.CMSIS.5.8.0/CMSIS/DSP/Lib/GCC/
+mkdir -p ARM.CMSIS.${RELEASE}/CMSIS/DSP/Lib/GCC/
+mv lib*.a ARM.CMSIS.${RELEASE}/CMSIS/DSP/Lib/GCC/
 
 echo "ARM CMSIS ready!"
 
